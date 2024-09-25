@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +35,8 @@ class userController extends Controller
             'password'=> "required|min:3"
         ]);
         if(Auth::attempt($formfield)){
-            return response('login success');
+            $products=product::all();
+            return redirect('home')->with('products',$products);
         }else{
             return response('login fail or repeat user');
         }
