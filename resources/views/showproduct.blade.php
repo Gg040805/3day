@@ -1,5 +1,6 @@
 <div>
-    <form action="" method="post">
+    <form action="{{ route("add_to_cart",$product->id) }}" method="post">
+    @csrf
     <center>
     <h1>Product Detail</h1>
     <label>Vegetable name</label><br>
@@ -8,8 +9,8 @@
     <input type="number" name="p_mass" oninput="cal()" step="100" min="100" value="{{ $product->p_mass }}"><br>
     <label>Price</label><br>
     <input type="text" name="p_price" value="{{ $product->p_price }}" readonly><br>
-    <label>Price</label><br>
-    <input type="text" name="t_price" value="{{ $product->p_price }}" readonly><br><br>
+    <label>Total Price</label><br>
+    <p id="total_price"></p>
     <button type="submit">Click to buy</button><br><br>
     <button><a href="{{ route('home') }}">Click this button to return to online shop page</a></button>
 </center>
@@ -27,6 +28,6 @@
         }
         var total=price/100*mass.value;
 
-        document.querySelector("input[name='t_price']").value=total;
+        document.querySelector("#total_price").innerHTML=total;
     }
 </script>
